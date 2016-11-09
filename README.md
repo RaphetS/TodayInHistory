@@ -12,6 +12,6 @@
 - 事件总线Eventbus
 - 其他库：图片缩放photoview、日历material-calendarview
 
-项目整体风格为Material design风格，项目参考[GeekNews](https://github.com/codeestX/GeekNews)，API来源为聚合数据与[干货集中营](http://gank.io/api)，非常感谢他们。
+项目整体风格为Material design风格，架构使用了MVP，项目参考[GeekNews](https://github.com/codeestX/GeekNews)，API来源为聚合数据与[干货集中营](http://gank.io/api)，非常感谢他们。
 
 功能和一些细节将在后续慢慢完善。
