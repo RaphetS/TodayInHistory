@@ -1,0 +1,27 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@android:color/holo_red_light</item>
+
+        //ActionBarDrawerToggle设置颜色
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <style name="WelcomeActivityTheme" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowBackground">@drawable/welcome</item>
+    </style>
+
+    <!--透明状态栏-->
+    <style name="TranslucentStatusAppTheme" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+    <style name="TextAppearance.ExpandedTitle"
+        parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">26sp</item>
+    </style>
+</resources>

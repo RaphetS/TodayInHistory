@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/drawer_todayInHistory"
+        android:checkable="true"
+        android:icon="@drawable/ic_history"
+        android:title="历史上的今天" />
+    <item
+        android:id="@+id/drawer_gril"
+        android:checkable="true"
+        android:icon="@drawable/icon_gril"
+        android:title="妹纸" />
+
+    <item
+        android:id="@+id/drawer_like"
+        android:checkable="true"
+        android:icon="@drawable/ic_unlike"
+        android:title="收藏" />
+    <item
+        android:id="@+id/drawer_about"
+        android:checkable="true"
+        android:icon="@drawable/ic_about"
+        android:title="关于" />
+
+</menu>
