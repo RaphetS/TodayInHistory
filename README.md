@@ -1,7 +1,7 @@
 # 历史上的今天
-![image](https://github.com/RaphetS/TodayInHistory/blob/master/screeshot/1.png =100)![image](https://github.com/RaphetS/TodayInHistory/blob/master/screeshot/2.png =100)
-![image](https://github.com/RaphetS/TodayInHistory/blob/master/screeshot/3.png =100)![image](https://github.com/RaphetS/TodayInHistory/blob/master/screeshot/4.png =100)
-![image](https://github.com/RaphetS/TodayInHistory/blob/master/screeshot/5.png =100)
+![image](https://github.com/RaphetS/TodayInHistory/blob/master/screeshot/1.png =72x128)![image](https://github.com/RaphetS/TodayInHistory/blob/master/screeshot/2.png =72x128)
+![image](https://github.com/RaphetS/TodayInHistory/blob/master/screeshot/3.png =72x128)![image](https://github.com/RaphetS/TodayInHistory/blob/master/screeshot/4.png =100)
+![image](https://github.com/RaphetS/TodayInHistory/blob/master/screeshot/5.png =72x128)
 
 使用的框架：
 
