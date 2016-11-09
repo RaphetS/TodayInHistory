@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import org.raphets.todayinhistory.R;
+import org.raphets.todayinhistory.utils.WeakHandler;
 
 import butterknife.ButterKnife;
 
@@ -17,7 +18,7 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
-        new Handler().postDelayed(new Runnable() {
+        new WeakHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
             startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
