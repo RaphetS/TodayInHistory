@@ -18,7 +18,4 @@
 
 #Demo下载
 
-http://fir.im/ce2a
-
-![image](https://github.com/RaphetS/TodayInHistory/blob/master/screeshot/demo.png)
-
+https://beta.bugly.qq.com/if5q
