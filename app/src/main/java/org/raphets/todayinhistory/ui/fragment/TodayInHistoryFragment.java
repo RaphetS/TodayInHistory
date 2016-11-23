@@ -127,7 +127,7 @@ public class TodayInHistoryFragment extends BaseFragment implements TodayInHisto
                 Intent intent=new Intent(getActivity(),HistoryDetailActivity.class);
                 intent.putExtra(Constants.EID,mDatas.get(position).getE_id());
                 intent.putExtra(Constants.DATE,mDatas.get(position).getDate());
-                ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(getActivity(),view,"shareView");
+                ActivityOptionsCompat options=ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),view,"shareView");
                 startActivity(intent,options.toBundle());
 
             }
