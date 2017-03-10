@@ -1,10 +1,9 @@
 package org.raphets.todayinhistory.mvp.presenter;
 
-import org.raphets.todayinhistory.bean.GrilBean;
-import org.raphets.todayinhistory.common.Constants;
+import org.raphets.todayinhistory.base.BasePresenter;
+import org.raphets.todayinhistory.bean.GirlBean;
 import org.raphets.todayinhistory.http.GrilHttppResponse;
-import org.raphets.todayinhistory.http.RetrofitHelper;
-import org.raphets.todayinhistory.mvp.contact.GrilContact;
+import org.raphets.todayinhistory.mvp.contact.GirlContract;
 
 import java.util.List;
 
@@ -16,21 +15,20 @@ import rx.schedulers.Schedulers;
  * Created by RaphetS on 2016/10/19.
  */
 
-public class GrilPresenter implements GrilContact.Present {
-    private GrilContact.View mView;
+public class GirlPresenter extends BasePresenter<GirlContract.Modle, GirlContract.View> {
+
+
     private int currentPage=1;
-    public GrilPresenter(GrilContact.View mView) {
-        this.mView = mView;
+    public GirlPresenter(GirlContract.Modle model, GirlContract.View view) {
+        super(model, view);
     }
 
-    @Override
+
     public void getGrilList() {
-        currentPage=1;
-        RetrofitHelper.getInstance()
-                .getGrilList(currentPage, Constants.NUM_PAGE)
+            getmModel().getGirlList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GrilHttppResponse<List<GrilBean>>>() {
+                .subscribe(new Subscriber<GrilHttppResponse<List<GirlBean>>>() {
                     @Override
                     public void onCompleted() {
 
@@ -39,12 +37,12 @@ public class GrilPresenter implements GrilContact.Present {
                     @Override
                     public void onError(Throwable e) {
                         if (mView!=null) {
-                            mView.showFail("获取数据失败");
+                            getmView().showFail("获取数据失败");
                         }
                     }
 
                     @Override
-                    public void onNext(GrilHttppResponse<List<GrilBean>> httppResponse) {
+                    public void onNext(GrilHttppResponse<List<GirlBean>> httppResponse) {
                         if (mView!=null) {
                             if (!httppResponse.getError()) {
 
@@ -61,14 +59,13 @@ public class GrilPresenter implements GrilContact.Present {
                 });
     }
 
-    @Override
+
     public void getMoreGril() {
         currentPage++;
-        RetrofitHelper.getInstance()
-                .getGrilList(currentPage, Constants.NUM_PAGE)
+       getmModel().getMoreGirl()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GrilHttppResponse<List<GrilBean>>>() {
+                .subscribe(new Subscriber<GrilHttppResponse<List<GirlBean>>>() {
                     @Override
                     public void onCompleted() {
 
@@ -80,9 +77,9 @@ public class GrilPresenter implements GrilContact.Present {
                     }
 
                     @Override
-                    public void onNext(GrilHttppResponse<List<GrilBean>> httppResponse) {
+                    public void onNext(GrilHttppResponse<List<GirlBean>> httppResponse) {
                         if (mView!=null) {
-                            mView.showMoreGril(httppResponse.getResults());
+                            getmView().showMoreGirl(httppResponse.getResults());
                         }
                     }
                 });

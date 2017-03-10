@@ -1,6 +1,6 @@
 package org.raphets.todayinhistory.http;
 
-import org.raphets.todayinhistory.bean.GrilBean;
+import org.raphets.todayinhistory.bean.GirlBean;
 import org.raphets.todayinhistory.bean.Histroy;
 import org.raphets.todayinhistory.bean.Picture;
 import org.raphets.todayinhistory.bean.SimpleHistory;
@@ -40,5 +40,5 @@ public interface APIService {
      * 妹纸列表
      */
     @GET("data/福利/{num}/{page}")
-    Observable<GrilHttppResponse<List<GrilBean>>> getGirlList(@Path("num") int num, @Path("page") int page);
+    Observable<GrilHttppResponse<List<GirlBean>>> getGirlList(@Path("num") int num, @Path("page") int page);
 }

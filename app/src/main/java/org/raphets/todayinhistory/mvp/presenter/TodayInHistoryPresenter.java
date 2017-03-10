@@ -1,9 +1,9 @@
 package org.raphets.todayinhistory.mvp.presenter;
 
+import org.raphets.todayinhistory.base.BasePresenter;
 import org.raphets.todayinhistory.bean.SimpleHistory;
 import org.raphets.todayinhistory.http.HttpResponse;
-import org.raphets.todayinhistory.http.RetrofitHelper;
-import org.raphets.todayinhistory.mvp.contact.TodayInHistoryContact;
+import org.raphets.todayinhistory.mvp.contact.TodayInHistoryContract;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -13,17 +13,15 @@ import rx.schedulers.Schedulers;
  * Created by RaphetS on 2016/10/15.
  */
 
-public class TodayInHistoryPresenter implements TodayInHistoryContact.Present {
-    private TodayInHistoryContact.View mView;
+public class TodayInHistoryPresenter extends BasePresenter<TodayInHistoryContract.Model, TodayInHistoryContract.View> {
 
-    public TodayInHistoryPresenter(TodayInHistoryContact.View mView) {
-        this.mView = mView;
+    public TodayInHistoryPresenter(TodayInHistoryContract.Model model, TodayInHistoryContract.View view) {
+        super(model,view);
     }
 
-    @Override
+
     public void getData(int month, int day) {
-        RetrofitHelper.getInstance()
-                .getHistoryList(month,day)
+      getmModel().getData(month,day)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<HttpResponse<SimpleHistory>>() {
@@ -34,7 +32,7 @@ public class TodayInHistoryPresenter implements TodayInHistoryContact.Present {
                     @Override
                     public void onError(Throwable e) {
                         if (mView!=null) {
-                            mView.showFail(e.toString());
+                            getmView().showFail(e.toString());
                         }
                     }
 
@@ -42,9 +40,9 @@ public class TodayInHistoryPresenter implements TodayInHistoryContact.Present {
                     public void onNext(HttpResponse<SimpleHistory> httpResponse) {
                         if (mView!=null){
                              if (httpResponse.getError_code()==0){
-                                 mView.showContent(httpResponse.getResult());
+                                 getmView().showContent(httpResponse.getResult());
                              }else {
-                                 mView.showFail(httpResponse.getReason());
+                                 getmView().showFail(httpResponse.getReason());
                              }
                         }
                     }

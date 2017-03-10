@@ -11,7 +11,7 @@ import android.widget.Scroller;
 
 import org.raphets.todayinhistory.R;
 import org.raphets.todayinhistory.base.BaseViewHolder;
-import org.raphets.todayinhistory.bean.GrilBean;
+import org.raphets.todayinhistory.bean.GirlBean;
 import org.raphets.todayinhistory.http.ImageLoader;
 import org.raphets.todayinhistory.utils.ScreenUtil;
 
@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 public class GrilAdapter extends RecyclerView.Adapter {
-    private List<GrilBean> mDatas;
+    private List<GirlBean> mDatas;
     private Context mContext;
     private RecyclerView mRecyclerView;
 
@@ -34,7 +34,7 @@ public class GrilAdapter extends RecyclerView.Adapter {
     private boolean isLoading = false;
     private boolean isFirst=true;
 
-    public GrilAdapter(Context mContext, List<GrilBean> mDatas, RecyclerView mRecyclerView) {
+    public GrilAdapter(Context mContext, List<GirlBean> mDatas, RecyclerView mRecyclerView) {
         this.mDatas = mDatas;
         this.mContext = mContext;
         this.mRecyclerView = mRecyclerView;

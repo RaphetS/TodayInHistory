@@ -16,7 +16,7 @@ import org.raphets.todayinhistory.R;
 import org.raphets.todayinhistory.base.BaseActivity;
 import org.raphets.todayinhistory.base.BaseFragment;
 import org.raphets.todayinhistory.ui.fragment.AboutFragment;
-import org.raphets.todayinhistory.ui.fragment.GrilFragment;
+import org.raphets.todayinhistory.ui.fragment.GirlFragment;
 import org.raphets.todayinhistory.ui.fragment.LikeFragment;
 import org.raphets.todayinhistory.ui.fragment.TodayInHistoryFragment;
 
@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity {
 
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private GrilFragment mGrilFragment;
+    private GirlFragment mGrilFragment;
     private TodayInHistoryFragment mTodayFragment;
     private LikeFragment mLikeFragment;
     private AboutFragment mAboutFragment;
@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initData() {
-        mGrilFragment = new GrilFragment();
+        mGrilFragment = new GirlFragment();
         mTodayFragment = new TodayInHistoryFragment();
         mLikeFragment = new LikeFragment();
         mAboutFragment = new AboutFragment();

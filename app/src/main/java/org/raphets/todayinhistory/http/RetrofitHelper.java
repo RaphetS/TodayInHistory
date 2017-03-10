@@ -1,6 +1,6 @@
 package org.raphets.todayinhistory.http;
 
-import org.raphets.todayinhistory.bean.GrilBean;
+import org.raphets.todayinhistory.bean.GirlBean;
 import org.raphets.todayinhistory.bean.Histroy;
 import org.raphets.todayinhistory.bean.Picture;
 import org.raphets.todayinhistory.bean.SimpleHistory;
@@ -75,7 +75,7 @@ public class RetrofitHelper {
     /**
      * 获取妹子列表
      */
-    public Observable<GrilHttppResponse<List<GrilBean>>> getGrilList(int page,int num){
+    public Observable<GrilHttppResponse<List<GirlBean>>> getGrilList(int page,int num){
         if (mGrilApiService==null){
             new RetrofitHelper();
         }

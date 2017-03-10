@@ -9,14 +9,17 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.BaseAdapter;
 
 import org.raphets.todayinhistory.R;
 import org.raphets.todayinhistory.adapter.GrilAdapter;
 import org.raphets.todayinhistory.base.BaseFragment;
-import org.raphets.todayinhistory.bean.GrilBean;
+import org.raphets.todayinhistory.base.BasePresenter;
+import org.raphets.todayinhistory.bean.GirlBean;
 import org.raphets.todayinhistory.common.Constants;
-import org.raphets.todayinhistory.mvp.contact.GrilContact;
-import org.raphets.todayinhistory.mvp.presenter.GrilPresenter;
+import org.raphets.todayinhistory.mvp.contact.GirlContract;
+import org.raphets.todayinhistory.mvp.model.GirlModel;
+import org.raphets.todayinhistory.mvp.presenter.GirlPresenter;
 import org.raphets.todayinhistory.ui.activity.GrilDetailActivity;
 import org.raphets.todayinhistory.utils.SnackBarUtil;
 
@@ -28,7 +31,7 @@ import butterknife.BindView;
 /**
  * 妹子列表
  */
-public class GrilFragment extends BaseFragment implements GrilContact.View {
+public class GirlFragment extends BaseFragment<BasePresenter> implements GirlContract.View {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipeRefreshLayout)
@@ -37,8 +40,8 @@ public class GrilFragment extends BaseFragment implements GrilContact.View {
     FloatingActionButton mFab;
 
     private GridLayoutManager mLayoutManager;
-    private GrilPresenter mPresent;
-    private ArrayList<GrilBean> mDatas = new ArrayList<>();
+    private GirlPresenter mPresent;
+    private ArrayList<GirlBean> mDatas = new ArrayList<>();
     private GrilAdapter mAdapter;
 
     @Override
@@ -60,7 +63,7 @@ public class GrilFragment extends BaseFragment implements GrilContact.View {
             }
         });
 
-        mPresent = new GrilPresenter(this);
+        mPresent = new GirlPresenter(new GirlModel(),this);
         mPresent.getGrilList();
 
     }
@@ -111,7 +114,7 @@ public class GrilFragment extends BaseFragment implements GrilContact.View {
     }
 
     @Override
-    public void showContent(List<GrilBean> data) {
+    public void showContent(List<GirlBean> data) {
         if (mSrl.isRefreshing()) {
             mSrl.setRefreshing(false);
         }
@@ -120,8 +123,9 @@ public class GrilFragment extends BaseFragment implements GrilContact.View {
         mAdapter.notifyDataSetChanged();
     }
 
+
     @Override
-    public void showMoreGril(List<GrilBean> data) {
+    public void showMoreGirl(List<GirlBean> data) {
         mAdapter.loadCompleted();
         if (data != null && data.size() > 0) {
 

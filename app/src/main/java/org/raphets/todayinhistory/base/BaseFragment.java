@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
     protected View mRootView;
+    private P presenter;
+
 
     @Nullable
     @Override
@@ -19,6 +21,10 @@ public abstract class BaseFragment extends Fragment {
         ButterKnife.bind(this,mRootView);
         initEvents();
         return mRootView;
+    }
+
+    public P getPresenter(){
+        return presenter;
     }
 
     protected abstract void initEvents();

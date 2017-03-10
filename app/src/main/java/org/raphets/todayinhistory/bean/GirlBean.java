@@ -9,17 +9,17 @@ import io.realm.RealmObject;
  * Created by RaphetS on 2016/10/19.
  */
 
-public class GrilBean extends RealmObject implements Parcelable {
+public class GirlBean extends RealmObject implements Parcelable {
     private String _id;
     private String desc;
     private String type;
     private String url;
     private int height;
 
-    public GrilBean(){}
+    public GirlBean(){}
 
 
-    protected GrilBean(Parcel in) {
+    protected GirlBean(Parcel in) {
         _id = in.readString();
         desc = in.readString();
         type = in.readString();
@@ -27,15 +27,15 @@ public class GrilBean extends RealmObject implements Parcelable {
         height = in.readInt();
     }
 
-    public static final Creator<GrilBean> CREATOR = new Creator<GrilBean>() {
+    public static final Creator<GirlBean> CREATOR = new Creator<GirlBean>() {
         @Override
-        public GrilBean createFromParcel(Parcel in) {
-            return new GrilBean(in);
+        public GirlBean createFromParcel(Parcel in) {
+            return new GirlBean(in);
         }
 
         @Override
-        public GrilBean[] newArray(int size) {
-            return new GrilBean[size];
+        public GirlBean[] newArray(int size) {
+            return new GirlBean[size];
         }
     };
 

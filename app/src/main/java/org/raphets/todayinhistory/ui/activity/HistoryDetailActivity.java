@@ -20,7 +20,8 @@ import org.raphets.todayinhistory.bean.Picture;
 import org.raphets.todayinhistory.common.Constants;
 import org.raphets.todayinhistory.db.RealmHelper;
 import org.raphets.todayinhistory.http.ImageLoader;
-import org.raphets.todayinhistory.mvp.contact.HistoryDetailContact;
+import org.raphets.todayinhistory.mvp.contact.HistoryDetailContract;
+import org.raphets.todayinhistory.mvp.model.HistoryDetailModel;
 import org.raphets.todayinhistory.mvp.presenter.HistoryDetailPresenter;
 import org.raphets.todayinhistory.utils.SnackBarUtil;
 
@@ -31,7 +32,7 @@ import butterknife.BindView;
  * @author RaphetS
  */
 
-public class HistoryDetailActivity extends BaseActivity implements HistoryDetailContact.View {
+public class HistoryDetailActivity extends BaseActivity<HistoryDetailPresenter> implements HistoryDetailContract.View {
     @BindView(R.id.collToolBar)
     CollapsingToolbarLayout mCollToolbar;
     @BindView(R.id.toolbar)
@@ -80,9 +81,10 @@ public class HistoryDetailActivity extends BaseActivity implements HistoryDetail
 
         initFabLike();
 
-        mPresent = new HistoryDetailPresenter(this);
+        mPresent = new HistoryDetailPresenter(new HistoryDetailModel(),this);
 
         mPresent.getHistoryData(mEid);
+
     }
 
     private void initFabLike() {
@@ -121,8 +123,9 @@ public class HistoryDetailActivity extends BaseActivity implements HistoryDetail
 
     }
 
+
     @Override
-    public void showFail(String msg) {
+    public void onFailed(String msg) {
         SnackBarUtil.showLong(getWindow().getDecorView(), msg);
     }
 

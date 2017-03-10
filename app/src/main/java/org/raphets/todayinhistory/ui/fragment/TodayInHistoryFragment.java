@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,7 +25,8 @@ import org.raphets.todayinhistory.base.BaseAdapter;
 import org.raphets.todayinhistory.base.BaseFragment;
 import org.raphets.todayinhistory.bean.SimpleHistory;
 import org.raphets.todayinhistory.common.Constants;
-import org.raphets.todayinhistory.mvp.contact.TodayInHistoryContact;
+import org.raphets.todayinhistory.mvp.contact.TodayInHistoryContract;
+import org.raphets.todayinhistory.mvp.model.TodayInHistoryModel;
 import org.raphets.todayinhistory.mvp.presenter.TodayInHistoryPresenter;
 import org.raphets.todayinhistory.ui.activity.CalendarActivity;
 import org.raphets.todayinhistory.ui.activity.HistoryDetailActivity;
@@ -44,7 +46,7 @@ import butterknife.OnClick;
 /**
  * 历史上的今天
  */
-public class TodayInHistoryFragment extends BaseFragment implements TodayInHistoryContact.View {
+public class TodayInHistoryFragment extends BaseFragment implements TodayInHistoryContract.View {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipeRefreshLayout)
@@ -81,7 +83,7 @@ public class TodayInHistoryFragment extends BaseFragment implements TodayInHisto
     }
 
     private void init() {
-        mPresent = new TodayInHistoryPresenter(this);
+        mPresent = new TodayInHistoryPresenter(new TodayInHistoryModel(),this);
 
         mSwipeRefreshLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE);
         mSwipeRefreshLayout.post(new Runnable() {

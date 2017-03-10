@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -113,13 +114,12 @@ public class LikeFragment extends BaseFragment {
 
     private void addListener() {
         mAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent=new Intent(getActivity(),HistoryDetailActivity.class);
                 intent.putExtra(Constants.EID,mDatas.get(position).geteId());
                 intent.putExtra(Constants.DATE,mDatas.get(position).getDate());
-                ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(getActivity(),view,"shareView");
+                ActivityOptionsCompat options=ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),view,"shareView");
                 startActivity(intent,options.toBundle());
             }
         });

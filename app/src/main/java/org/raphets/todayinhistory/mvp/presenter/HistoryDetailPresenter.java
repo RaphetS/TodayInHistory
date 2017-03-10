@@ -1,10 +1,10 @@
 package org.raphets.todayinhistory.mvp.presenter;
 
+import org.raphets.todayinhistory.base.BasePresenter;
 import org.raphets.todayinhistory.bean.Histroy;
 import org.raphets.todayinhistory.bean.Picture;
 import org.raphets.todayinhistory.http.HttpResponse;
-import org.raphets.todayinhistory.http.RetrofitHelper;
-import org.raphets.todayinhistory.mvp.contact.HistoryDetailContact;
+import org.raphets.todayinhistory.mvp.contact.HistoryDetailContract;
 
 import java.util.List;
 
@@ -16,23 +16,16 @@ import rx.schedulers.Schedulers;
  * Created by RaphetS on 2016/10/16.
  */
 
-public class HistoryDetailPresenter implements HistoryDetailContact.Present {
+public class HistoryDetailPresenter extends BasePresenter<HistoryDetailContract.Model, HistoryDetailContract.View> {
 
-    private HistoryDetailContact.View mView;
-
-    public HistoryDetailPresenter(HistoryDetailContact.View mView) {
-        this.mView = mView;
+    public HistoryDetailPresenter(HistoryDetailContract.Model model, HistoryDetailContract.View view) {
+        super(model, view);
     }
 
-    @Override
-    public void detachView() {
-        mView = null;
-    }
 
-    @Override
     public void getHistoryData(String eId) {
-        RetrofitHelper.getInstance().getHistoryDetail(eId)
-                .subscribeOn(Schedulers.io())
+        getmModel().getHistoryData(eId)
+                    .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<HttpResponse<Histroy<Picture>>>() {
                     @Override
@@ -42,7 +35,7 @@ public class HistoryDetailPresenter implements HistoryDetailContact.Present {
                     @Override
                     public void onError(Throwable e) {
                         if (mView!=null) {
-                            mView.showFail("获取数据失败");
+                            getmView().onFailed("获取数据失败");
                         }
                     }
 
@@ -54,15 +47,20 @@ public class HistoryDetailPresenter implements HistoryDetailContact.Present {
                                 if (histroyList.size() > 0) {
                                     mView.showData(histroyList.get(0));
                                 } else {
-                                    mView.showFail("暂无数据");
+                                    mView.onFailed("暂无数据");
                                 }
                             } else {
-                                mView.showFail(httpResponse.getReason());
+                                mView.onFailed(httpResponse.getReason());
                             }
 
 
                         }
                     }
                 });
+    }
+
+    @Override
+    public void detachView() {
+        mView = null;
     }
 }

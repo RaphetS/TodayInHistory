@@ -1,6 +1,5 @@
 package org.raphets.todayinhistory.base;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,14 +17,16 @@ import butterknife.ButterKnife;
  * Created by RaphetS on 2016/10/15.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity {
     private List<Activity> mActivitys=new ArrayList<>();
+    private P presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         mActivitys.add(this);
+
         ButterKnife.bind(this);
     }
 
@@ -36,6 +37,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         mActivitys.remove(this);
     }
+
+    public void getPresenter(P presenter){
+        this.presenter = presenter;
+
+    }
+
+    public P getPresenter(){
+        return  presenter;
+
+    }
+
 
     public void finishAll(){
        for (Activity activity:mActivitys){
