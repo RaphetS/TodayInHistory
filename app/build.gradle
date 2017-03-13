@@ -42,7 +42,8 @@ dependencies {
     compile 'net.opacapp:multiline-collapsingtoolbar:1.2.2'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
-    compile 'com.squareup.okhttp3:okhttp:3.4.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
 }

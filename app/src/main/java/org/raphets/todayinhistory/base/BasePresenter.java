@@ -19,6 +19,10 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
         this.weakReferenceOfView = new WeakReference<V>(view);
         this.weakReferenceOfModel = new WeakReference<M>(model);
     }
+    public BasePresenter(V view) {
+
+        this.mView = view;
+    }
 
     public M getmModel() {
         return mModel;

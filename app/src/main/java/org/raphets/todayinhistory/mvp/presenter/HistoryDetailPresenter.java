@@ -5,6 +5,7 @@ import org.raphets.todayinhistory.bean.Histroy;
 import org.raphets.todayinhistory.bean.Picture;
 import org.raphets.todayinhistory.http.HttpResponse;
 import org.raphets.todayinhistory.mvp.contact.HistoryDetailContract;
+import org.raphets.todayinhistory.mvp.model.HistoryDetailModel;
 
 import java.util.List;
 
@@ -17,9 +18,9 @@ import rx.schedulers.Schedulers;
  */
 
 public class HistoryDetailPresenter extends BasePresenter<HistoryDetailContract.Model, HistoryDetailContract.View> {
-
-    public HistoryDetailPresenter(HistoryDetailContract.Model model, HistoryDetailContract.View view) {
-        super(model, view);
+    public HistoryDetailPresenter(HistoryDetailContract.View view) {
+        super(view);
+        this.mModel = new HistoryDetailModel();
     }
 
 

@@ -4,6 +4,7 @@ import org.raphets.todayinhistory.base.BasePresenter;
 import org.raphets.todayinhistory.bean.SimpleHistory;
 import org.raphets.todayinhistory.http.HttpResponse;
 import org.raphets.todayinhistory.mvp.contact.TodayInHistoryContract;
+import org.raphets.todayinhistory.mvp.model.TodayInHistoryModel;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -15,8 +16,10 @@ import rx.schedulers.Schedulers;
 
 public class TodayInHistoryPresenter extends BasePresenter<TodayInHistoryContract.Model, TodayInHistoryContract.View> {
 
-    public TodayInHistoryPresenter(TodayInHistoryContract.Model model, TodayInHistoryContract.View view) {
-        super(model,view);
+
+    public TodayInHistoryPresenter(TodayInHistoryContract.View view) {
+        super(view);
+        this.mModel = new TodayInHistoryModel();
     }
 
 

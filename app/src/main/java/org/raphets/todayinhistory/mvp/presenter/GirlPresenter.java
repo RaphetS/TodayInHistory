@@ -4,6 +4,7 @@ import org.raphets.todayinhistory.base.BasePresenter;
 import org.raphets.todayinhistory.bean.GirlBean;
 import org.raphets.todayinhistory.http.GrilHttppResponse;
 import org.raphets.todayinhistory.mvp.contact.GirlContract;
+import org.raphets.todayinhistory.mvp.model.GirlModel;
 
 import java.util.List;
 
@@ -17,15 +18,14 @@ import rx.schedulers.Schedulers;
 
 public class GirlPresenter extends BasePresenter<GirlContract.Modle, GirlContract.View> {
 
-
-    private int currentPage=1;
-    public GirlPresenter(GirlContract.Modle model, GirlContract.View view) {
-        super(model, view);
+    public GirlPresenter(GirlContract.View view) {
+        super(view);
+        this.mModel = new GirlModel();
     }
 
 
-    public void getGrilList() {
-            getmModel().getGirlList()
+    public void getGrilList(int pageIndex, int sizePerPage) {
+            getmModel().getGirlList(pageIndex, sizePerPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GrilHttppResponse<List<GirlBean>>>() {
@@ -60,9 +60,8 @@ public class GirlPresenter extends BasePresenter<GirlContract.Modle, GirlContrac
     }
 
 
-    public void getMoreGril() {
-        currentPage++;
-       getmModel().getMoreGirl()
+    public void getMoreGril(int pageIndex, int sizePerPage) {
+       getmModel().getMoreGirl(pageIndex, sizePerPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GrilHttppResponse<List<GirlBean>>>() {

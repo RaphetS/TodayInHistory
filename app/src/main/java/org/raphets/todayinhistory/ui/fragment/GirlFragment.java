@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.BaseAdapter;
 
@@ -31,7 +32,7 @@ import butterknife.BindView;
 /**
  * 妹子列表
  */
-public class GirlFragment extends BaseFragment<BasePresenter> implements GirlContract.View {
+public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlContract.View {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipeRefreshLayout)
@@ -43,7 +44,9 @@ public class GirlFragment extends BaseFragment<BasePresenter> implements GirlCon
     private GirlPresenter mPresent;
     private ArrayList<GirlBean> mDatas = new ArrayList<>();
     private GrilAdapter mAdapter;
-
+    private int currentPageIndex = 0;
+    private static final String TAG = "GirlFragment";
+    
     @Override
     protected void initEvents() {
 
@@ -59,12 +62,14 @@ public class GirlFragment extends BaseFragment<BasePresenter> implements GirlCon
         mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresent.getGrilList();
+                currentPageIndex = 0;
+                Log.i(TAG, "onRefresh:currentPageIndex= " + currentPageIndex);
+                mPresent.getGrilList(currentPageIndex, Constants.NUM_PAGE);
             }
         });
 
-        mPresent = new GirlPresenter(new GirlModel(),this);
-        mPresent.getGrilList();
+        mPresent = new GirlPresenter(this);
+        mPresent.getGrilList(currentPageIndex, Constants.NUM_PAGE);
 
     }
 
@@ -81,7 +86,9 @@ public class GirlFragment extends BaseFragment<BasePresenter> implements GirlCon
         mAdapter.setOnLoadMoreListener(new GrilAdapter.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                mPresent.getMoreGril();
+                currentPageIndex++;
+                mPresent.getMoreGril(currentPageIndex, Constants.NUM_PAGE);
+                Log.i(TAG, "onLoadMore:currentPageIndex= " + currentPageIndex);
             }
         });
 

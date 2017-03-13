@@ -23,6 +23,7 @@ import org.raphets.todayinhistory.R;
 import org.raphets.todayinhistory.adapter.HistoryAdapter;
 import org.raphets.todayinhistory.base.BaseAdapter;
 import org.raphets.todayinhistory.base.BaseFragment;
+import org.raphets.todayinhistory.base.BasePresenter;
 import org.raphets.todayinhistory.bean.SimpleHistory;
 import org.raphets.todayinhistory.common.Constants;
 import org.raphets.todayinhistory.mvp.contact.TodayInHistoryContract;
@@ -46,7 +47,7 @@ import butterknife.OnClick;
 /**
  * 历史上的今天
  */
-public class TodayInHistoryFragment extends BaseFragment implements TodayInHistoryContract.View {
+public class TodayInHistoryFragment extends BaseFragment<TodayInHistoryPresenter> implements TodayInHistoryContract.View {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipeRefreshLayout)
@@ -83,7 +84,7 @@ public class TodayInHistoryFragment extends BaseFragment implements TodayInHisto
     }
 
     private void init() {
-        mPresent = new TodayInHistoryPresenter(new TodayInHistoryModel(),this);
+        mPresent = new TodayInHistoryPresenter(this);
 
         mSwipeRefreshLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE);
         mSwipeRefreshLayout.post(new Runnable() {

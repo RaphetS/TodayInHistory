@@ -22,8 +22,8 @@ public class GirlContract {
     }
 
     public interface Modle extends IModel {
-        Observable<GrilHttppResponse<List<GirlBean>>> getGirlList();
+        Observable<GrilHttppResponse<List<GirlBean>>> getGirlList(int pageIndex, int sizePerPage);
 
-        Observable<GrilHttppResponse<List<GirlBean>>> getMoreGirl();
+        Observable<GrilHttppResponse<List<GirlBean>>> getMoreGirl(int pageIndex, int sizePerPage);
     }
 }

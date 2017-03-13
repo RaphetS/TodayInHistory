@@ -81,7 +81,7 @@ public class HistoryDetailActivity extends BaseActivity<HistoryDetailPresenter> 
 
         initFabLike();
 
-        mPresent = new HistoryDetailPresenter(new HistoryDetailModel(),this);
+        mPresent = new HistoryDetailPresenter(this);
 
         mPresent.getHistoryData(mEid);
 

@@ -16,18 +16,17 @@ import rx.Observable;
  */
 
 public class GirlModel implements GirlContract.Modle {
-    private int currentPage = 1;
 
     @Override
-    public Observable<GrilHttppResponse<List<GirlBean>>> getGirlList() {
-        currentPage=1;
+    public Observable<GrilHttppResponse<List<GirlBean>>> getGirlList(int pageIndex, int sizePerPage) {
+
         return RetrofitHelper.getInstance()
-                .getGrilList(currentPage, Constants.NUM_PAGE);
+                .getGrilList(pageIndex,sizePerPage);
     }
 
     @Override
-    public Observable<GrilHttppResponse<List<GirlBean>>> getMoreGirl() {
+    public Observable<GrilHttppResponse<List<GirlBean>>> getMoreGirl(int pageIndex, int sizePerPage) {
         return RetrofitHelper.getInstance()
-                .getGrilList(currentPage, Constants.NUM_PAGE);
+                .getGrilList(pageIndex, sizePerPage);
     }
 }
