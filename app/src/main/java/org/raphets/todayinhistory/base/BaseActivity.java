@@ -38,7 +38,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         mActivitys.remove(this);
     }
 
-    public void getPresenter(P presenter){
+    public void setPresenter(P presenter){
         this.presenter = presenter;
 
     }

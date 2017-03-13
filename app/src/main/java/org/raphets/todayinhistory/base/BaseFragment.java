@@ -27,6 +27,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
         return presenter;
     }
 
+    public void setPresenter(P presenter){
+        this.presenter = presenter;
+    }
+
     protected abstract void initEvents();
 
     public abstract int getLayoutId() ;

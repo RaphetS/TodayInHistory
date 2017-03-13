@@ -21,7 +21,6 @@ import org.raphets.todayinhistory.common.Constants;
 import org.raphets.todayinhistory.db.RealmHelper;
 import org.raphets.todayinhistory.http.ImageLoader;
 import org.raphets.todayinhistory.mvp.contact.HistoryDetailContract;
-import org.raphets.todayinhistory.mvp.model.HistoryDetailModel;
 import org.raphets.todayinhistory.mvp.presenter.HistoryDetailPresenter;
 import org.raphets.todayinhistory.utils.SnackBarUtil;
 
@@ -48,7 +47,7 @@ public class HistoryDetailActivity extends BaseActivity<HistoryDetailPresenter> 
 
 
     private String mEid;
-    private HistoryDetailPresenter mPresent;
+
     private HistoryLikeBean mLikeBean;
     private String mDate;
     private RealmHelper mRealmHelper;
@@ -81,10 +80,14 @@ public class HistoryDetailActivity extends BaseActivity<HistoryDetailPresenter> 
 
         initFabLike();
 
-        mPresent = new HistoryDetailPresenter(this);
+        setPresenter(new HistoryDetailPresenter(this));
+        getPresenter().getHistoryData(mEid);
 
-        mPresent.getHistoryData(mEid);
+    }
 
+    @Override
+    public void setPresenter(HistoryDetailPresenter presenter) {
+        super.setPresenter(presenter);
     }
 
     private void initFabLike() {
@@ -155,6 +158,6 @@ public class HistoryDetailActivity extends BaseActivity<HistoryDetailPresenter> 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresent.detachView();
+        getPresenter().detachView();
     }
 }

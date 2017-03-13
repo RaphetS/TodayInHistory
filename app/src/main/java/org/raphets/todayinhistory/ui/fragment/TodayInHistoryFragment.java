@@ -1,7 +1,6 @@
 package org.raphets.todayinhistory.ui.fragment;
 
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -23,11 +22,9 @@ import org.raphets.todayinhistory.R;
 import org.raphets.todayinhistory.adapter.HistoryAdapter;
 import org.raphets.todayinhistory.base.BaseAdapter;
 import org.raphets.todayinhistory.base.BaseFragment;
-import org.raphets.todayinhistory.base.BasePresenter;
 import org.raphets.todayinhistory.bean.SimpleHistory;
 import org.raphets.todayinhistory.common.Constants;
 import org.raphets.todayinhistory.mvp.contact.TodayInHistoryContract;
-import org.raphets.todayinhistory.mvp.model.TodayInHistoryModel;
 import org.raphets.todayinhistory.mvp.presenter.TodayInHistoryPresenter;
 import org.raphets.todayinhistory.ui.activity.CalendarActivity;
 import org.raphets.todayinhistory.ui.activity.HistoryDetailActivity;
@@ -60,7 +57,6 @@ public class TodayInHistoryFragment extends BaseFragment<TodayInHistoryPresenter
 
     private List<SimpleHistory> mDatas = new ArrayList<>();
     private HistoryAdapter mAdapter;
-    private TodayInHistoryPresenter mPresent;
     private int currentYear;
     private int currentMonth;
     private int currentDay;
@@ -84,7 +80,7 @@ public class TodayInHistoryFragment extends BaseFragment<TodayInHistoryPresenter
     }
 
     private void init() {
-        mPresent = new TodayInHistoryPresenter(this);
+        setPresenter(new TodayInHistoryPresenter(this));
 
         mSwipeRefreshLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE);
         mSwipeRefreshLayout.post(new Runnable() {
@@ -106,7 +102,7 @@ public class TodayInHistoryFragment extends BaseFragment<TodayInHistoryPresenter
         setTVTime();
 
 
-        mPresent.getData(currentMonth, currentDay);
+        getPresenter().getData(currentMonth, currentDay);
 
 
     }
@@ -140,12 +136,16 @@ public class TodayInHistoryFragment extends BaseFragment<TodayInHistoryPresenter
             @Override
             public void onRefresh() {
 
-                mPresent.getData(currentMonth, currentDay);
+                getPresenter().getData(currentMonth, currentDay);
             }
         });
     }
 
 
+    @Override
+    public void setPresenter(TodayInHistoryPresenter presenter) {
+        super.setPresenter(presenter);
+    }
 
     @Subscribe
     public void onEventMainThread(CalendarDay date) {
@@ -155,7 +155,7 @@ public class TodayInHistoryFragment extends BaseFragment<TodayInHistoryPresenter
 
         mSwipeRefreshLayout.setRefreshing(true);
         setTVTime();
-        mPresent.getData(currentMonth,currentDay);
+        getPresenter().getData(currentMonth,currentDay);
     }
 
     @OnClick({R.id.rl_previous, R.id.rl_next, R.id.floatActionBtn, R.id.tv_time})
@@ -165,14 +165,14 @@ public class TodayInHistoryFragment extends BaseFragment<TodayInHistoryPresenter
                 setPreVious();
                 setTVTime();
                 mSwipeRefreshLayout.setRefreshing(true);
-                mPresent.getData(currentMonth, currentDay);
+                getPresenter().getData(currentMonth, currentDay);
                 break;
             case R.id.rl_next:
                 setNext();
                 setTVTime();
 
                 mSwipeRefreshLayout.setRefreshing(true);
-                mPresent.getData(currentMonth, currentDay);
+                getPresenter().getData(currentMonth, currentDay);
                 break;
             case R.id.floatActionBtn:
                 Intent intent=new Intent(getActivity(),CalendarActivity.class);
@@ -185,7 +185,7 @@ public class TodayInHistoryFragment extends BaseFragment<TodayInHistoryPresenter
                 setTVTime();
 
                 mSwipeRefreshLayout.setRefreshing(true);
-                mPresent.getData(currentMonth,currentDay);
+                getPresenter().getData(currentMonth,currentDay);
                 break;
             default:
                 break;

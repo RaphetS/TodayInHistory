@@ -10,16 +10,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.BaseAdapter;
 
 import org.raphets.todayinhistory.R;
 import org.raphets.todayinhistory.adapter.GrilAdapter;
 import org.raphets.todayinhistory.base.BaseFragment;
-import org.raphets.todayinhistory.base.BasePresenter;
 import org.raphets.todayinhistory.bean.GirlBean;
 import org.raphets.todayinhistory.common.Constants;
 import org.raphets.todayinhistory.mvp.contact.GirlContract;
-import org.raphets.todayinhistory.mvp.model.GirlModel;
 import org.raphets.todayinhistory.mvp.presenter.GirlPresenter;
 import org.raphets.todayinhistory.ui.activity.GrilDetailActivity;
 import org.raphets.todayinhistory.utils.SnackBarUtil;
@@ -41,7 +38,7 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
     FloatingActionButton mFab;
 
     private GridLayoutManager mLayoutManager;
-    private GirlPresenter mPresent;
+
     private ArrayList<GirlBean> mDatas = new ArrayList<>();
     private GrilAdapter mAdapter;
     private int currentPageIndex = 0;
@@ -64,12 +61,12 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
             public void onRefresh() {
                 currentPageIndex = 0;
                 Log.i(TAG, "onRefresh:currentPageIndex= " + currentPageIndex);
-                mPresent.getGrilList(currentPageIndex, Constants.NUM_PAGE);
+                getPresenter().getGrilList(currentPageIndex, Constants.NUM_PAGE);
             }
         });
 
-        mPresent = new GirlPresenter(this);
-        mPresent.getGrilList(currentPageIndex, Constants.NUM_PAGE);
+        setPresenter(new GirlPresenter(this));
+        getPresenter().getGrilList(currentPageIndex, Constants.NUM_PAGE);
 
     }
 
@@ -87,7 +84,7 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
             @Override
             public void onLoadMore() {
                 currentPageIndex++;
-                mPresent.getMoreGril(currentPageIndex, Constants.NUM_PAGE);
+                getPresenter().getMoreGril(currentPageIndex, Constants.NUM_PAGE);
                 Log.i(TAG, "onLoadMore:currentPageIndex= " + currentPageIndex);
             }
         });
@@ -156,6 +153,6 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mPresent.detachView();
+        getPresenter().detachView();
     }
 }
